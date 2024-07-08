@@ -27,9 +27,11 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
+          cache: false
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v6
         with:
           version: v1.59
           working-directory: src/myapp
+          problem-matchers: true
         
