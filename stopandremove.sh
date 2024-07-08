@@ -1,0 +1,1 @@
+docker stop github-action-revel && docker rm github-action-revel
