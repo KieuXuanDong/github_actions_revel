@@ -9,6 +9,6 @@ type App struct {
 }
 
 func (c App) Index() revel.Result {
-
+	c.set("index_variable", "Index Variable")
 	return c.Render()
 }
