@@ -16,5 +16,22 @@ jobs:
       - name: Set up containers
         run: ./build.sh && ./run.sh
 
-      - name: Run tests depending only on local network
+      - name: Run golang lint
+        run: ./build.sh && ./run.sh
+
+      - name: Run tests
         run: docker exec github-action-revel sh -c 'revel test myapp dev'
+
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.59
+        
