@@ -33,15 +33,15 @@ jobs:
           password: ${{secrets.GITHUB_TOKEN}}
 
       - id: repository_lowercase
-        uses: ASzc/change-string-case-action@v1
-        with:
-          string: ${{ github.repository }}
+        name: Repository to lowercase
+        run: |
+            echo "repository=${GITHUB_REPOSITORY@L}" >> $GITHUB_OUTPUT
 
       - name: Build docker image
-        run: docker build -t ghcr.io/${{ steps.repository_lowercase.outputs.lowercase }}/${{ env.DOCKER_IMAGE_NAME }}:latest .
+        run: docker build -t ghcr.io/${{ steps.repository_lowercase.outputs.repository }}/${{ env.DOCKER_IMAGE_NAME }}:latest .
     
       - name: Push Docker Image
-        run: docker push ghcr.io/${{ steps.repository_lowercase.outputs.lowercase }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+        run: docker push ghcr.io/${{ steps.repository_lowercase.outputs.repository }}/${{ env.DOCKER_IMAGE_NAME }}:latest
 
   create-release-tags:
     if: github.event.pull_request.merged == true
