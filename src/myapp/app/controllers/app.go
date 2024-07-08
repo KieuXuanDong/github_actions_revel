@@ -15,9 +15,5 @@ func (c App) Index() revel.Result {
 }
 
 func (c App) isValueValid(value string) bool {
-	if value == "valid" {
-		return true
-	}
-
-	return false
+	return value == "valid"
 }
