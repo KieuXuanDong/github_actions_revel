@@ -16,9 +16,6 @@ jobs:
       - name: Set up containers
         run: ./build.sh && ./run.sh
 
-      - name: Run golang lint
-        run: ./build.sh && ./run.sh
-
       - name: Run tests
         run: docker exec github-action-revel sh -c 'revel test myapp dev'
 
