@@ -9,6 +9,11 @@ type App struct {
 }
 
 func (c App) Index() revel.Result {
+	indexVariable := "Index Variable"
+	c.isValueValid(indexVariable)
+	return c.Render(indexVariable)
+}
 
-	return c.Render()
+func (c App) isValueValid(value string) bool {
+	return value == "valid"
 }
