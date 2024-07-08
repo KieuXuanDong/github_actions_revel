@@ -1,4 +1,4 @@
-name: CI
+name: CD
 
 on:
   pull_request:
@@ -23,11 +23,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - id: repository_lowercase
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: ${{ github.repository }}
+
       - name: Build docker image
         run: docker build -t ${{ env.DOCKER_IMAGE_NAME }} .
     
       - name: Push Docker Image
-        run: docker push ghcr.io/${{ github.repository }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+        run: docker push ghcr.io/${{ steps.repository_lowercase.outputs.lowercase }}/${{ env.DOCKER_IMAGE_NAME }}:latest
 
   create-release-tags:
     if: github.event.pull_request.merged == true
