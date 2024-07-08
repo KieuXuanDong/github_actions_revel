@@ -14,7 +14,7 @@ func (c App) Index() revel.Result {
 	return c.Render(indexVariable)
 }
 
-func (c App) isValueValid(value string) boolean {
+func (c App) isValueValid(value string) bool {
 	if value == "valid" {
 		return true
 	}
